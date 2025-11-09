@@ -120,7 +120,16 @@ def _compute_news_payload(
     start_date = as_of_date - timedelta(days=lookback)
 
     articles = _fetch_news(ticker, start_date, as_of_date)
+    # Debug: log fetched article counts before and after scoring
+    try:
+        print(f"[DEBUG news_agent] {ticker}: fetched_raw_articles={len(articles)}")
+    except Exception:
+        pass
     articles = _score_articles(articles)
+    try:
+        print(f"[DEBUG news_agent] {ticker}: scored_articles={len(articles)}, use_llm={use_llm}, llm_model={llm_model}")
+    except Exception:
+        pass
     articles = articles[:max_count]
 
     judgement, supporting_points = _build_opinion(weight, articles)
@@ -278,9 +287,11 @@ def _fetch_google_news(ticker: str, start_date: date, end_date: date) -> List[Ne
     try:
         with contextlib.closing(urlopen(url, timeout=10)) as response:
             payload = response.read()
-    except URLError:
+    except URLError as e:
+        print(f"[DEBUG news_agent] _fetch_google_news URLError for {ticker}: {e}")
         return []
-    except TimeoutError:
+    except TimeoutError as e:
+        print(f"[DEBUG news_agent] _fetch_google_news TimeoutError for {ticker}: {e}")
         return []
 
     try:
@@ -329,7 +340,12 @@ def _fetch_google_news(ticker: str, start_date: date, end_date: date) -> List[Ne
         )
 
     articles.sort(key=lambda article: article.published_at or "", reverse=True)
-    return _deduplicate_articles(articles)
+    deduped = _deduplicate_articles(articles)
+    try:
+        print(f"[DEBUG news_agent] _fetch_google_news {ticker}: parsed={len(articles)}, deduped={len(deduped)}")
+    except Exception:
+        pass
+    return deduped
 
 
 def _fetch_yfinance_news(ticker: str, start_date: date, end_date: date) -> List[NewsArticle]:
@@ -366,7 +382,12 @@ def _fetch_yfinance_news(ticker: str, start_date: date, end_date: date) -> List[
         )
 
     articles.sort(key=lambda article: article.published_at or "", reverse=True)
-    return _deduplicate_articles(articles)
+    deduped = _deduplicate_articles(articles)
+    try:
+        print(f"[DEBUG news_agent] _fetch_yfinance_news {ticker}: parsed={len(articles)}, deduped={len(deduped)}")
+    except Exception:
+        pass
+    return deduped
 
 
 def _score_articles(articles: List[NewsArticle]) -> List[NewsArticle]:
