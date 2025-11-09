@@ -1,0 +1,609 @@
+You are the SmartFolio interpretability analyst responsible for explaining allocations produced by a mimic decision-tree model labelled 'model_name'. Your audience is a portfolio manager who needs a practical, data-grounded explanation of why the policy allocates capital the way it does. Use crisp language, connect tree splits and attention patterns to portfolio outcomes, and flag any data gaps instead of guessing.
+
+Model provenance: This explainability snapshot comes from a mimic tree-based model labelled "model_name" that approximates the SmartFolio HGAT policy. Explain why the allocations emerge the way they do, grounding each point in the snapshot data.
+
+Snapshot metadata:
+Generated at: 2025-11-08T22:10:44+00:00
+Market: custom
+Model path: SmartFolio/checkpoints/ppo_hgat_custom_20251108_121539.zip
+Dataset dir: /home/pushpendras0026/inter/SmartFolio/dataset_default/data_train_predict_custom/1_hy
+
+Decision tree surrogate notes:
+Global R^2: 0.046
+Universe size: 97
+Per-stock feature count: 6
+Top weighted positions from the surrogate tree:
+#1: HINDUNILVR.NS (avg weight 1.34%)
+#2: SHREECEM.NS (avg weight 1.28%)
+#3: BAJFINANCE.NS (avg weight 1.27%)
+#4: WIPRO.NS (avg weight 1.26%)
+#5: GRSE.NS (avg weight 1.19%)
+
+Attention head summary:
+Semantic attention distribution: Self: 18.8%, Industry: 22.3%, Positive: 35.2%, Negative: 23.7%
+Industry attention focus: MRF.NS → GOLDBEES.NS (0.042), MRF.NS → CESC.NS (0.041), MRF.NS → NIFTYBEES.NS (0.041)
+Positive attention focus: SUZLON.NS → PAGEIND.NS (0.188), TRIDENT.NS → PAGEIND.NS (0.180), RELIANCE.NS → PAGEIND.NS (0.173)
+Negative attention focus: INFY.NS → MRF.NS (0.495), RELIANCE.NS → MRF.NS (0.482), BHARTIARTL.NS → MRF.NS (0.482)
+
+Instructions: Produce 4-6 bullets. Each bullet must begin with a bold heading followed by one or two sentences.
+Cover in order: (1) overall signal quality + limitations, (2) how the mimic tree's splits and top stocks explain the observed allocations, (3) what the attention channels reveal about cross-stock relationships, (4) concrete implications for portfolio positioning and risk controls, and (5) any missing or inconsistent data that might weaken the story. If information is absent, say so explicitly instead of inventing details.
+Avoid raw JSON in the final answer; translate everything into plain language.
+Full explainability snapshot JSON follows verbatim:
+{
+  "generated_at": "2025-11-08T22:10:44+00:00",
+  "market": "custom",
+  "model_path": "SmartFolio/checkpoints/ppo_hgat_custom_20251108_121539.zip",
+  "dataset_dir": "/home/pushpendras0026/inter/SmartFolio/dataset_default/data_train_predict_custom/1_hy",
+  "tag": null,
+  "source_files": {
+    "tree": "/home/pushpendras0026/inter/SmartFolio/explainability_results/explain_tree_custom.json",
+    "attention": "/home/pushpendras0026/inter/SmartFolio/explainability_results/attention_summary_custom.json"
+  },
+  "synopsis": {
+    "tree": {
+      "global_r2": 0.04587087935302273,
+      "num_stocks": 97,
+      "input_dim": 6,
+      "top_assets": [
+        {
+          "rank": 1,
+          "stock_index": 37,
+          "avg_weight": 0.013444794341921806,
+          "ticker": "HINDUNILVR.NS"
+        },
+        {
+          "rank": 2,
+          "stock_index": 80,
+          "avg_weight": 0.012820505537092686,
+          "ticker": "SHREECEM.NS"
+        },
+        {
+          "rank": 3,
+          "stock_index": 7,
+          "avg_weight": 0.01270223781466484,
+          "ticker": "BAJFINANCE.NS"
+        },
+        {
+          "rank": 4,
+          "stock_index": 95,
+          "avg_weight": 0.012587040662765503,
+          "ticker": "WIPRO.NS"
+        },
+        {
+          "rank": 5,
+          "stock_index": 30,
+          "avg_weight": 0.011911801062524319,
+          "ticker": "GRSE.NS"
+        },
+        {
+          "rank": 6,
+          "stock_index": 3,
+          "avg_weight": 0.011888088658452034,
+          "ticker": "ASHOKLEY.NS"
+        },
+        {
+          "rank": 7,
+          "stock_index": 24,
+          "avg_weight": 0.011876516975462437,
+          "ticker": "CUMMINSIND.NS"
+        },
+        {
+          "rank": 8,
+          "stock_index": 62,
+          "avg_weight": 0.011875350028276443,
+          "ticker": "NESTLEIND.NS"
+        },
+        {
+          "rank": 9,
+          "stock_index": 77,
+          "avg_weight": 0.011658500880002975,
+          "ticker": "RVNL.NS"
+        },
+        {
+          "rank": 10,
+          "stock_index": 81,
+          "avg_weight": 0.01164716761559248,
+          "ticker": "SIEMENS.NS"
+        }
+      ]
+    },
+    "attention": {
+      "semantic_mean": {
+        "Self": 0.18836930394172668,
+        "Industry": 0.22297146916389465,
+        "Positive": 0.3516639769077301,
+        "Negative": 0.23699524998664856
+      },
+      "semantic_rank": [
+        {
+          "label": "Positive",
+          "share": 0.3516639769077301
+        },
+        {
+          "label": "Negative",
+          "share": 0.23699524998664856
+        },
+        {
+          "label": "Industry",
+          "share": 0.22297146916389465
+        },
+        {
+          "label": "Self",
+          "share": 0.18836930394172668
+        }
+      ],
+      "dominant_semantic": "Positive",
+      "top_edges": {
+        "industry": [
+          {
+            "rank": 1,
+            "source_index": 59,
+            "target_index": 29,
+            "mean_attention": 0.041961655020713806,
+            "source_ticker": "MRF.NS",
+            "target_ticker": "GOLDBEES.NS"
+          },
+          {
+            "rank": 2,
+            "source_index": 59,
+            "target_index": 19,
+            "mean_attention": 0.04143949970602989,
+            "source_ticker": "MRF.NS",
+            "target_ticker": "CESC.NS"
+          },
+          {
+            "rank": 3,
+            "source_index": 59,
+            "target_index": 63,
+            "mean_attention": 0.04104512557387352,
+            "source_ticker": "MRF.NS",
+            "target_ticker": "NIFTYBEES.NS"
+          },
+          {
+            "rank": 4,
+            "source_index": 59,
+            "target_index": 57,
+            "mean_attention": 0.04054762423038483,
+            "source_ticker": "MRF.NS",
+            "target_ticker": "MON100.NS"
+          },
+          {
+            "rank": 5,
+            "source_index": 39,
+            "target_index": 81,
+            "mean_attention": 0.0194969791918993,
+            "source_ticker": "IDFCFIRSTB.NS",
+            "target_ticker": "SIEMENS.NS"
+          }
+        ],
+        "positive": [
+          {
+            "rank": 1,
+            "source_index": 84,
+            "target_index": 67,
+            "mean_attention": 0.18757523596286774,
+            "source_ticker": "SUZLON.NS",
+            "target_ticker": "PAGEIND.NS"
+          },
+          {
+            "rank": 2,
+            "source_index": 92,
+            "target_index": 67,
+            "mean_attention": 0.1796680986881256,
+            "source_ticker": "TRIDENT.NS",
+            "target_ticker": "PAGEIND.NS"
+          },
+          {
+            "rank": 3,
+            "source_index": 75,
+            "target_index": 67,
+            "mean_attention": 0.17297326028347015,
+            "source_ticker": "RELIANCE.NS",
+            "target_ticker": "PAGEIND.NS"
+          },
+          {
+            "rank": 4,
+            "source_index": 53,
+            "target_index": 67,
+            "mean_attention": 0.17254950106143951,
+            "source_ticker": "MANAPPURAM.NS",
+            "target_ticker": "PAGEIND.NS"
+          },
+          {
+            "rank": 5,
+            "source_index": 38,
+            "target_index": 67,
+            "mean_attention": 0.1715284138917923,
+            "source_ticker": "ICICIBANK.NS",
+            "target_ticker": "PAGEIND.NS"
+          }
+        ],
+        "negative": [
+          {
+            "rank": 1,
+            "source_index": 44,
+            "target_index": 59,
+            "mean_attention": 0.49523019790649414,
+            "source_ticker": "INFY.NS",
+            "target_ticker": "MRF.NS"
+          },
+          {
+            "rank": 2,
+            "source_index": 75,
+            "target_index": 59,
+            "mean_attention": 0.48230478167533875,
+            "source_ticker": "RELIANCE.NS",
+            "target_ticker": "MRF.NS"
+          },
+          {
+            "rank": 3,
+            "source_index": 12,
+            "target_index": 59,
+            "mean_attention": 0.4820951223373413,
+            "source_ticker": "BHARTIARTL.NS",
+            "target_ticker": "MRF.NS"
+          },
+          {
+            "rank": 4,
+            "source_index": 38,
+            "target_index": 59,
+            "mean_attention": 0.48039382696151733,
+            "source_ticker": "ICICIBANK.NS",
+            "target_ticker": "MRF.NS"
+          },
+          {
+            "rank": 5,
+            "source_index": 6,
+            "target_index": 59,
+            "mean_attention": 0.47817742824554443,
+            "source_ticker": "AXISBANK.NS",
+            "target_ticker": "MRF.NS"
+          }
+        ]
+      }
+    }
+  },
+  "tree_summary": {
+    "model_path": "SmartFolio/checkpoints/ppo_hgat_custom_20251108_121539.zip",
+    "dataset_dir": "/home/pushpendras0026/inter/SmartFolio/dataset_default/data_train_predict_custom/1_hy",
+    "market": "custom",
+    "num_stocks": 97,
+    "input_dim": 6,
+    "global_r2": 0.04587087935302273,
+    "top_indices": [
+      37,
+      80,
+      7,
+      95,
+      30,
+      3,
+      24,
+      62,
+      77,
+      81
+    ],
+    "avg_weights": [
+      0.013444794341921806,
+      0.012820505537092686,
+      0.01270223781466484,
+      0.012587040662765503,
+      0.011911801062524319,
+      0.011888088658452034,
+      0.011876516975462437,
+      0.011875350028276443,
+      0.011658500880002975,
+      0.01164716761559248
+    ],
+    "top_tickers": [
+      "HINDUNILVR.NS",
+      "SHREECEM.NS",
+      "BAJFINANCE.NS",
+      "WIPRO.NS",
+      "GRSE.NS",
+      "ASHOKLEY.NS",
+      "CUMMINSIND.NS",
+      "NESTLEIND.NS",
+      "RVNL.NS",
+      "SIEMENS.NS"
+    ],
+    "ticker_universe": [
+      "AARTIIND.NS",
+      "ADANIENT.NS",
+      "APOLLOTYRE.NS",
+      "ASHOKLEY.NS",
+      "ASIANPAINT.NS",
+      "AUROPHARMA.NS",
+      "AXISBANK.NS",
+      "BAJFINANCE.NS",
+      "BATAINDIA.NS",
+      "BDL.NS",
+      "BEML.NS",
+      "BHARATFORG.NS",
+      "BHARTIARTL.NS",
+      "BHEL.NS",
+      "BIOCON.NS",
+      "BPCL.NS",
+      "BRITANNIA.NS",
+      "BSOFT.NS",
+      "CDSL.NS",
+      "CESC.NS",
+      "CIPLA.NS",
+      "COALINDIA.NS",
+      "COFORGE.NS",
+      "CONCOR.NS",
+      "CUMMINSIND.NS",
+      "DIXON.NS",
+      "DRREDDY.NS",
+      "EICHERMOT.NS",
+      "GODREJPROP.NS",
+      "GOLDBEES.NS",
+      "GRSE.NS",
+      "HAVELLS.NS",
+      "HCLTECH.NS",
+      "HDFCAMC.NS",
+      "HDFCBANK.NS",
+      "HEROMOTOCO.NS",
+      "HINDALCO.NS",
+      "HINDUNILVR.NS",
+      "ICICIBANK.NS",
+      "IDFCFIRSTB.NS",
+      "IEX.NS",
+      "IIFL.NS",
+      "INDIGO.NS",
+      "INDUSTOWER.NS",
+      "INFY.NS",
+      "IRCON.NS",
+      "ITC.NS",
+      "JSWSTEEL.NS",
+      "KOTAKBANK.NS",
+      "LALPATHLAB.NS",
+      "LAURUSLABS.NS",
+      "LUPIN.NS",
+      "M&M.NS",
+      "MANAPPURAM.NS",
+      "MARICO.NS",
+      "MARUTI.NS",
+      "MCX.NS",
+      "MON100.NS",
+      "MPHASIS.NS",
+      "MRF.NS",
+      "MUTHOOTFIN.NS",
+      "NAVINFLUOR.NS",
+      "NESTLEIND.NS",
+      "NIFTYBEES.NS",
+      "OBEROIRLTY.NS",
+      "OIL.NS",
+      "ONGC.NS",
+      "PAGEIND.NS",
+      "PERSISTENT.NS",
+      "PIDILITIND.NS",
+      "PIIND.NS",
+      "POLYCAB.NS",
+      "POONAWALLA.NS",
+      "PRESTIGE.NS",
+      "RAYMOND.NS",
+      "RELIANCE.NS",
+      "RITES.NS",
+      "RVNL.NS",
+      "SAIL.NS",
+      "SBIN.NS",
+      "SHREECEM.NS",
+      "SIEMENS.NS",
+      "SRF.NS",
+      "SUNPHARMA.NS",
+      "SUZLON.NS",
+      "TATACHEM.NS",
+      "TATACOMM.NS",
+      "TATAELXSI.NS",
+      "TATASTEEL.NS",
+      "TCS.NS",
+      "TECHM.NS",
+      "TITAN.NS",
+      "TRIDENT.NS",
+      "TVSMOTOR.NS",
+      "VOLTAS.NS",
+      "WIPRO.NS",
+      "ZENSARTECH.NS"
+    ]
+  },
+  "attention_summary": {
+    "model_path": "checkpoints/ppo_hgat_custom_20251108_121539.zip",
+    "dataset_dir": "/home/pushpendras0026/inter/SmartFolio/dataset_default/data_train_predict_custom/1_hy",
+    "market": "custom",
+    "num_stocks": 97,
+    "semantic_labels": [
+      "Self",
+      "Industry",
+      "Positive",
+      "Negative"
+    ],
+    "semantic_mean": [
+      0.18836930394172668,
+      0.22297146916389465,
+      0.3516639769077301,
+      0.23699524998664856
+    ],
+    "avg_allocations": [
+      0.518254280090332,
+      0.4912547469139099,
+      0.5370016098022461,
+      0.5442637801170349,
+      0.5466892123222351,
+      0.5241802334785461,
+      0.5371373295783997,
+      0.5080271363258362,
+      0.563546895980835,
+      0.5186190605163574,
+      0.4819977879524231,
+      0.49722254276275635,
+      0.5097060799598694,
+      0.49779000878334045,
+      0.5099223852157593,
+      0.5412828922271729,
+      0.5091543793678284,
+      0.47188109159469604,
+      0.5921160578727722,
+      0.5081092119216919,
+      0.4973594546318054,
+      0.5407378077507019,
+      0.539484441280365,
+      0.536919116973877,
+      0.48684701323509216,
+      0.5777977108955383,
+      0.4948558211326599,
+      0.48931950330734253,
+      0.4915444850921631,
+      0.5048105716705322,
+      0.5247913002967834,
+      0.5318103432655334,
+      0.47816216945648193,
+      0.5227616429328918,
+      0.4694480001926422,
+      0.4894809424877167,
+      0.46883392333984375,
+      0.500786542892456,
+      0.5248920917510986,
+      0.54677414894104,
+      0.49750760197639465,
+      0.536226212978363,
+      0.5504981279373169,
+      0.5643526315689087,
+      0.5145196318626404,
+      0.5432642698287964,
+      0.4928383529186249,
+      0.5332852602005005,
+      0.48637595772743225,
+      0.5163080096244812,
+      0.5283687710762024,
+      0.4927736818790436,
+      0.5099635124206543,
+      0.49729958176612854,
+      0.5678987503051758,
+      0.521285891532898,
+      0.5215535163879395,
+      0.5141697525978088,
+      0.5063373446464539,
+      0.5396648049354553,
+      0.4925650954246521,
+      0.5399563312530518,
+      0.5187931060791016,
+      0.5202717185020447,
+      0.5411126613616943,
+      0.48094624280929565,
+      0.4871550500392914,
+      0.525169312953949,
+      0.5095214247703552,
+      0.5400951504707336,
+      0.5603298544883728,
+      0.5173851847648621,
+      0.566485583782196,
+      0.49483686685562134,
+      0.5673588514328003,
+      0.4821053445339203,
+      0.5095992684364319,
+      0.5295383334159851,
+      0.5127761363983154,
+      0.5642787218093872,
+      0.4665091037750244,
+      0.5220221877098083,
+      0.5006959438323975,
+      0.4716907739639282,
+      0.5066694617271423,
+      0.5270736813545227,
+      0.49006056785583496,
+      0.5313664674758911,
+      0.5014886856079102,
+      0.5515034198760986,
+      0.5101196765899658,
+      0.5596668124198914,
+      0.5599123239517212,
+      0.5790632367134094,
+      0.541263997554779,
+      0.499995619058609,
+      0.5061375498771667
+    ],
+    "top_edges": {
+      "industry": [
+        [
+          59,
+          29,
+          0.041961655020713806
+        ],
+        [
+          59,
+          19,
+          0.04143949970602989
+        ],
+        [
+          59,
+          63,
+          0.04104512557387352
+        ],
+        [
+          59,
+          57,
+          0.04054762423038483
+        ],
+        [
+          39,
+          81,
+          0.0194969791918993
+        ]
+      ],
+      "positive": [
+        [
+          84,
+          67,
+          0.18757523596286774
+        ],
+        [
+          92,
+          67,
+          0.1796680986881256
+        ],
+        [
+          75,
+          67,
+          0.17297326028347015
+        ],
+        [
+          53,
+          67,
+          0.17254950106143951
+        ],
+        [
+          38,
+          67,
+          0.1715284138917923
+        ]
+      ],
+      "negative": [
+        [
+          44,
+          59,
+          0.49523019790649414
+        ],
+        [
+          75,
+          59,
+          0.48230478167533875
+        ],
+        [
+          12,
+          59,
+          0.4820951223373413
+        ],
+        [
+          38,
+          59,
+          0.48039382696151733
+        ],
+        [
+          6,
+          59,
+          0.47817742824554443
+        ]
+      ]
+    }
+  }
+}

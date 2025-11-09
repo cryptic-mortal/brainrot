@@ -1,0 +1,44 @@
+{
+  "model_path": "./checkpoints/ppo_hgat_custom_20251108_121539.zip",
+  "dataset_dir": "/home/pushpendras0026/inter/SmartFolio/dataset_default/data_train_predict_custom/1_hy",
+  "market": "custom",
+  "num_stocks": 97,
+  "input_dim": 6,
+  "global_r2": 0.04587087935302273,
+  "top_indices": [
+    37,
+    80,
+    7,
+    95,
+    30,
+    3,
+    24,
+    62,
+    77,
+    81
+  ],
+  "avg_weights": [
+    0.013444794341921806,
+    0.012820505537092686,
+    0.01270223781466484,
+    0.012587040662765503,
+    0.011911801062524319,
+    0.011888088658452034,
+    0.011876516975462437,
+    0.011875350028276443,
+    0.011658500880002975,
+    0.01164716761559248
+  ],
+  "top_tickers": [
+    "PIDILITIND.NS",
+    "MAZDOCK.NS",
+    "BHARTIARTL.NS",
+    "RVNL.NS",
+    "TECHM.NS",
+    "ICICIBANK.NS",
+    "JSWSTEEL.NS",
+    "PAGEIND.NS",
+    "BEML.NS",
+    "DATAPATTNS.NS"
+  ]
+}
